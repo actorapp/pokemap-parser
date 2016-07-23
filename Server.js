@@ -27,7 +27,7 @@ DataLoader.loadData()
             const urlParts = url.parse(req.url, true)
             const query = urlParts.query
 
-            if (urlParts.pathname === '/nearby' && query.lat && query.long && query.r) {
+            if (urlParts.pathname === '/api/v1/nearby' && query.lat && query.long && query.r) {
                 res.statusCode = 200
                 res.setHeader('Content-Type', 'application/json')
 
@@ -44,7 +44,7 @@ DataLoader.loadData()
                 return
             }
 
-            if (urlParts.pathname === '/nearby_rect' &&
+            if (urlParts.pathname === '/api/v1/nearby_rect' &&
                 query.topLat && query.topLong && query.bottomLat && query.bottomLong
             ) {
                 res.statusCode = 200
