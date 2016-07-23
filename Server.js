@@ -23,8 +23,6 @@ DataLoader.loadData()
                 })
         }, DATA_RELOAD_TIMOUT)
 
-        console.log(filter.getPokemonsInRect(55.009827120073155,82.93590730896445,56.009827120073155,83.93590730896445))
-
         const server = http.createServer((req, res) => {
             const urlParts = url.parse(req.url, true)
             const query = urlParts.query
@@ -33,9 +31,9 @@ DataLoader.loadData()
                 res.statusCode = 200
                 res.setHeader('Content-Type', 'application/json')
                 res.end(
-                    JSON.stringify(
-                        filter.getPokemonsNerby(query.lat, query.long, query.r)
-                    )
+                    JSON.stringify({
+                        pokemons: filter.getPokemonsNerby(query.lat, query.long, query.r)
+                    })
                 )
 
                 return
@@ -47,9 +45,9 @@ DataLoader.loadData()
                 res.statusCode = 200
                 res.setHeader('Content-Type', 'application/json')
                 res.end(
-                    JSON.stringify(
-                        filter.getPokemonsInRect(query.topLat, query.topLong, query.bottomLat, query.bottomLong)
-                    )
+                    JSON.stringify({
+                        pokemons: filter.getPokemonsInRect(query.topLat, query.topLong, query.bottomLat, query.bottomLong)
+                    })
                 )
 
                 return
