@@ -1,0 +1,15 @@
+{
+  "name": "pokemon-filter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
+  "dependencies": {
+    "tiny_request": "^1.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "run": "node Server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
