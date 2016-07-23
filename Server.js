@@ -21,6 +21,9 @@ DataLoader.loadData()
                 .then(data => {
                     filter.data = data
                 })
+                .catch(err => {
+                    console.log(err)
+                })
         }, DATA_RELOAD_TIMOUT)
 
         const server = http.createServer((req, res) => {
@@ -71,5 +74,8 @@ DataLoader.loadData()
         server.listen(PORT, HOST_NAME, () => {
             console.log(`Server running at http://${HOST_NAME}:${PORT}/`)
         })
+    })
+    .catch(err => {
+        console.log(err)
     })
 
