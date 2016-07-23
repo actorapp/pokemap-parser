@@ -1,6 +1,6 @@
 'use strict'
 
-const HOST_NAME = '127.0.0.1'
+const HOST_NAME = '0.0.0.0'
 const PORT = 3000
 const DATA_RELOAD_TIMOUT = 1000 * 60
 
@@ -29,7 +29,7 @@ DataLoader.loadData()
             const urlParts = url.parse(req.url, true)
             const query = urlParts.query
 
-            if (urlParts.pathname === '/getNearby' && query.lat && query.long && query.r) {
+            if (urlParts.pathname === '/nearby' && query.lat && query.long && query.r) {
                 res.statusCode = 200
                 res.setHeader('Content-Type', 'application/json')
                 res.end(
@@ -41,7 +41,7 @@ DataLoader.loadData()
                 return
             }
 
-            if (urlParts.pathname === '/getInRect' &&
+            if (urlParts.pathname === '/nearby_rect' &&
                 query.topLat && query.topLong && query.bottomLat && query.bottomLong
             ) {
                 res.statusCode = 200
