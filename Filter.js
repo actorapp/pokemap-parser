@@ -47,7 +47,7 @@ class Filter {
      * @param {Number} topLong
      * @param {Number} bottomLat
      * @param {Number} bottomLong
-     * @returns {Array}
+     * @returns {Pokemon[]}
      */
     getPokemonsInRect(topLat, topLong, bottomLat, bottomLong) {
         let results = []
@@ -63,6 +63,94 @@ class Filter {
                 )
             )
                 results.push(pokemon)
+        })
+
+        return results
+    }
+
+    /**
+     *
+     * @param {Number} lat
+     * @param {Number} long
+     * @param {Number} radius
+     * @returns {Gym[]}
+     */
+    getGymsNerby(lat, long, radius) {
+        let results = []
+
+        this._data.gyms.forEach(gym => {
+            if (this._getDistanceFromLatLonInKm(lat, long, gym.latitude, gym.longitude) <= radius)
+                results.push(gym)
+        })
+
+        return results
+    }
+
+    /**
+     * @param {Number} topLat
+     * @param {Number} topLong
+     * @param {Number} bottomLat
+     * @param {Number} bottomLong
+     * @returns {Gym[]}
+     */
+    getGymsInRect(topLat, topLong, bottomLat, bottomLong) {
+        let results = []
+
+        this._data.gyms.forEach(gym => {
+            if (this._isPointInRect(
+                    topLat,
+                    topLong,
+                    bottomLat,
+                    bottomLong,
+                    gym.latitude,
+                    gym.longitude
+                )
+            )
+                results.push(gym)
+        })
+
+        return results
+    }
+
+    /**
+     *
+     * @param {Number} lat
+     * @param {Number} long
+     * @param {Number} radius
+     * @returns {Pokestop[]}
+     */
+    getPokestopsNerby(lat, long, radius) {
+        let results = []
+
+        this._data.pokestops.forEach(pokestop => {
+            if (this._getDistanceFromLatLonInKm(lat, long, pokestop.latitude, pokestop.longitude) <= radius)
+                results.push(pokestop)
+        })
+
+        return results
+    }
+
+    /**
+     * @param {Number} topLat
+     * @param {Number} topLong
+     * @param {Number} bottomLat
+     * @param {Number} bottomLong
+     * @returns {Pokestop[]}
+     */
+    getPokestopsInRect(topLat, topLong, bottomLat, bottomLong) {
+        let results = []
+
+        this._data.pokestops.forEach(pokestop => {
+            if (this._isPointInRect(
+                    topLat,
+                    topLong,
+                    bottomLat,
+                    bottomLong,
+                    pokestop.latitude,
+                    pokestop.longitude
+                )
+            )
+                results.push(pokestop)
         })
 
         return results

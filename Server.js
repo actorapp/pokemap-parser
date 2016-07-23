@@ -30,9 +30,14 @@ DataLoader.loadData()
             if (urlParts.pathname === '/nearby' && query.lat && query.long && query.r) {
                 res.statusCode = 200
                 res.setHeader('Content-Type', 'application/json')
+
+                let args = [query.lat, query.long, query.r]
+
                 res.end(
                     JSON.stringify({
-                        pokemons: filter.getPokemonsNerby(query.lat, query.long, query.r)
+                        pokemons: filter.getPokemonsNerby(...args),
+                        gyms: filter.getGymsNerby(...args),
+                        pokestops: filter.getPokestopsNerby(...args)
                     })
                 )
 
@@ -44,9 +49,14 @@ DataLoader.loadData()
             ) {
                 res.statusCode = 200
                 res.setHeader('Content-Type', 'application/json')
+
+                let coordinates = [query.topLat, query.topLong, query.bottomLat, query.bottomLong]
+
                 res.end(
                     JSON.stringify({
-                        pokemons: filter.getPokemonsInRect(query.topLat, query.topLong, query.bottomLat, query.bottomLong)
+                        pokemons: filter.getPokemonsInRect(...coordinates),
+                        gyms: filter.getGymsInRect(...coordinates),
+                        pokestops: filter.getPokestopsInRect(...coordinates)
                     })
                 )
 

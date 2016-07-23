@@ -15,9 +15,15 @@ class DataLoader {
             req.get({
                 url: DATA_URL,
                 port: DATA_PORT,
-                json: true
+                json: true,
+                query: {
+                    pokemon: true,
+                    pokestops: true,
+                    gyms: true,
+                    scanned: true
+                }
             }, (body, response, err) => {
-                if (!err && response.statusCode == 200) {
+                if (!err && response.statusCode == 200) { 
                     resolve(RootObject.deserialize(body))
                     return
                 }
