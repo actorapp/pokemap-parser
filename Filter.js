@@ -167,17 +167,8 @@ class Filter {
      * @private
      */
     _isPointInRect(topLat, topLong, bottomLat, bottomLong, lat, long) {
-        if (lat > topLat)
-            return false
-        else if (lat <  bottomLat)
-            return false
-
-        if (bottomLong >= topLong)
-            return ((long >= topLong) && (long <= bottomLong))
-        else
-            return (long >= topLong)
-
-        return false
+        return lat >= topLat && lat <= bottomLat &&
+            long >= topLong && long <= bottomLong
     }
 
     _getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
