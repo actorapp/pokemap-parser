@@ -53,13 +53,43 @@ class Filter {
         let results = []
 
         this._data.pokemons.forEach(pokemon => {
-            if (pokemon.latitude >= topLat && pokemon.latitude <= bottomLat &&
-                pokemon.longitude >= topLong && pokemon.longitude <= bottomLong
+            if (this._isPointInRect(
+                    topLat,
+                    topLong,
+                    bottomLat,
+                    bottomLong,
+                    pokemon.latitude,
+                    pokemon.longitude
+                )
             )
                 results.push(pokemon)
         })
 
         return results
+    }
+
+    /**
+     * @param {Number} topLat
+     * @param {Number} topLong
+     * @param {Number} bottomLat
+     * @param {Number} bottomLong
+     * @param {Number} lat
+     * @param {Number} long
+     * @returns {boolean}
+     * @private
+     */
+    _isPointInRect(topLat, topLong, bottomLat, bottomLong, lat, long) {
+        if (lat > topLat)
+            return false
+        else if (lat <  bottomLat)
+            return false
+
+        if (bottomLong >= topLong)
+            return ((long >= topLong) && (long <= bottomLong))
+        else
+            return (long >= topLong)
+
+        return false
     }
 
     _getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
